@@ -161,3 +161,15 @@ app.post("/kategoriak", (req, res) => {
 })
 
 
+app.put("/kategoriak/:id", (req, res) => {
+    const sql = "UPDATE kategoriak SET nev = ? WHERE id = ?";
+
+    connection.query(
+        sql,
+        [req.body.nev, req.params.id],
+        (err, result) => {
+            if (err) return res.status(500).json(err);
+            res.json(result);
+        }
+    );
+});
